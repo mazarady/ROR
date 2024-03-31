@@ -1,17 +1,13 @@
 
-<%= render 'layouts/nav' %>
 
 <div class="text-center">
   <p style="color: green"><%= notice %></p>
 
-  <h1 class="text-2xl">Posts</h1>
+  <h1 class="text-4xl">Posts</h1>
 
   <div id="posts" class="mb-4">
     <% @posts.each do |post| %>
       <%= render post %>
-      <p>
-        <%= link_to "Show this post", post %>
-      </p>
     <% end %>
   </div>
 

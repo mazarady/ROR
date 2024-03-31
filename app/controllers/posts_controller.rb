@@ -1,18 +1,28 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, only: %i[ new edit destroy update ]
+  before_action :check_user_permission, only: [:edit, :update, :destroy]
 
   # GET /posts or /posts.json
   def index
     @posts = Post.all
   end
 
+  # GET /myposts or /myposts.json
+  def myposts
+    @user = User.find(current_user.id)
+    @posts = @user.posts
+  end
+
   # GET /posts/1 or /posts/1.json
   def show
+    @post.update({view: @post.view + 1})
   end
 
   # GET /posts/new
   def new
     @post = Post.new
+    # Rails.logger.debug "Current User: #{current_user.id}"
   end
 
   # GET /posts/1/edit
@@ -22,7 +32,7 @@ class PostsController < ApplicationController
   # POST /posts or /posts.json
   def create
     @post = Post.new(post_params)
-
+    @post.user_id = current_user.id
     respond_to do |format|
       if @post.save
         format.html { redirect_to post_url(@post), notice: "Post was successfully created." }
@@ -67,4 +77,14 @@ class PostsController < ApplicationController
     def post_params
       params.require(:post).permit(:title, :body)
     end
+
+    def check_user_permission
+      unless @post.user_id == current_user.id
+        respond_to do |format|
+          format.html { redirect_to post_url(@post) }
+          format.json { render json: { error: "Unauthorized" }, status: :unauthorized }
+        end
+      end
+    end
+
 end

@@ -16,10 +16,18 @@
     </div>
     <div class="hidden lg:flex lg:gap-x-12">
       <%= link_to "About", about_path, class:"text-sm font-semibold leading-6 text-gray-900" %>
-      <%= link_to "Posts", posts_path, class:"text-sm font-semibold leading-6 text-gray-900" %>
+      <%= link_to "All Posts", posts_path, class:"text-sm font-semibold leading-6 text-gray-900" %>
+      <%= link_to "My Posts", myposts_path, class:"text-sm font-semibold leading-6 text-gray-900" %>
+
     </div>
     <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-      <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Log in <span aria-hidden="true">&rarr;</span></a>
+      <% if user_signed_in? %>
+        <%= button_to "Log Out", destroy_user_session_path, method: :delete, class:"text-sm font-semibold leading-6 text-gray-900" %><span aria-hidden="true">&rarr;</span>
+      <% else %>
+        <%= link_to "Log in", new_user_session_path, class:"text-sm font-semibold leading-6 text-gray-900" %><span aria-hidden="true">&rarr;</span>
+        <%= link_to "Sign up", new_user_registration_path, class:"text-sm font-semibold leading-6 text-gray-900" %><span aria-hidden="true">&rarr;</span>
+      <% end %>
+     
     </div>
   </nav>
   <!-- Mobile menu, show/hide based on menu open state. -->
@@ -65,9 +73,6 @@
                 <a href="#" class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50">Contact sales</a>
               </div>
             </div>
-            <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Features</a>
-            <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Marketplace</a>
-            <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Company</a>
           </div>
           <div class="py-6">
             <a href="#" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Log in</a>

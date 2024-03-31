@@ -10,8 +10,10 @@
     <%= javascript_importmap_tags %>
       <script src="https://cdn.tailwindcss.com"></script>
   </head>
-
   <body>
+    <%= render 'layouts/nav' %>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
     <%= yield %>
   </body>
 </html>
