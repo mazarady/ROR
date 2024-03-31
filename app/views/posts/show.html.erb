@@ -1,0 +1,15 @@
+<%= render 'layouts/nav' %>
+
+<div class="text-center">
+<p style="color: green"><%= notice %></p>
+
+<%= render @post %>
+
+<div>
+<%= link_to "Edit this post", edit_post_path(@post), class: 'inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-150 ease-in-out' %> |
+<%= link_to "Back to posts", posts_path, class: 'inline-block bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded transition duration-150 ease-in-out' %>
+
+
+<%= button_to "Destroy this post", @post, method: :delete, class: 'bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transform transition duration-150 ease-in-out', data: { confirm: 'Are you sure?' } %>
+</div>
+</div>

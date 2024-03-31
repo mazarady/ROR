@@ -1,0 +1,14 @@
+<%= render 'layouts/nav' %>
+
+<div class="text-center">
+
+<h1 class="text-2xl">New post</h1>
+
+<%= render "form", post: @post %>
+
+<br>
+
+<div>
+  <%= link_to "Back to posts", posts_path %>
+</div>
+</div>
