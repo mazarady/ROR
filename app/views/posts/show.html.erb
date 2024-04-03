@@ -1,8 +1,5 @@
 <div class="text-center">
-<p style="color: green"><%= notice %></p>
-
 <%= render @post %>
-
 <div>
 <% if current_user && @post.user_id === current_user.id  %>
 <%= link_to "Edit this post", edit_post_path(@post), class: "font-regular text-blue-600 dark:text-blue-500 hover:underline"  %> |
@@ -12,4 +9,17 @@
 <%= button_to "Destroy this post", @post, method: :delete, class: 'bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transform transition duration-150 ease-in-out', data: { confirm: 'Are you sure?' } %>
 <% end %>
 </div>
+</div>
+
+<div class="container mx-auto">
+<% @comments.each do |comment| %>
+  <div class="flex flex-col">
+    <div><%= comment.content %></div>
+    <div>@ <%= comment.user.name %></div>
+  </div>
+<% end %>
+</div>
+
+<div class="container mx-auto">
+<%= render 'comments/form', post: @post %>
 </div>
